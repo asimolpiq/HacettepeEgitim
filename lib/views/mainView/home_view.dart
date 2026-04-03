@@ -16,7 +16,7 @@ class _CatchTheFlutterState extends HomeViewModel {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: customAppbar(),
-      body: catchAreaWidget(score, time), // score ve time'ı HomeViewModel'dan alıyoruz
+      body: catchAreaWidget(score, time,logoButtons), // score ve time'ı HomeViewModel'dan alıyoruz
       //catch area widgetı ekrandaki butonlarımızı skorları ve zamanı göstermek için kullandığımız widgetımızdır
     );
   }
