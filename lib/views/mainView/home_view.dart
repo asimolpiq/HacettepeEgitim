@@ -18,15 +18,17 @@ class _CatchTheFlutterState extends HomeViewModel {
       ),
       body: Column(
         children: [
-          GridView.builder(
-            shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+          Center(
+            child: GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+              ),
+              itemCount: 9,
+              itemBuilder: (BuildContext context, int index) {
+                return const ElevatedButton(onPressed: null, child: FlutterLogo());
+              },
             ),
-            itemCount: 9,
-            itemBuilder: (BuildContext context, int index) {
-              return const ElevatedButton(onPressed: null, child: FlutterLogo());
-            },
           ),
         ],
       ),
