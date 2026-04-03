@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../product/appbar/custom_appbar.dart';
+import '../../product/catchAreaWidget/catch_area_widget.dart';
 import 'viewmodel/homeViewmodel.dart';
 
 class CatchTheFlutter extends StatefulWidget {
@@ -13,25 +15,9 @@ class _CatchTheFlutterState extends HomeViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Score: 0"),
-      ),
-      body: Column(
-        children: [
-          Center(
-            child: GridView.builder(
-              shrinkWrap: true,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-              ),
-              itemCount: 9,
-              itemBuilder: (BuildContext context, int index) {
-                return const ElevatedButton(onPressed: null, child: FlutterLogo());
-              },
-            ),
-          ),
-        ],
-      ),
+      appBar: customAppbar(),
+      body: catchAreaWidget(score, time), // score ve time'ı HomeViewModel'dan alıyoruz
+      //catch area widgetı ekrandaki butonlarımızı skorları ve zamanı göstermek için kullandığımız widgetımızdır
     );
   }
 }

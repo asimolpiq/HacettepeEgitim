@@ -5,4 +5,5 @@ import '../home_view.dart';
 
 abstract class HomeViewModel extends State<CatchTheFlutter> {
   int score = 0;
+  int time = 0;
 }
