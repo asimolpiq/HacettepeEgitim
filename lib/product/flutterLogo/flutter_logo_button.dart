@@ -18,7 +18,7 @@ class _FlutterLogoButtonState extends State<FlutterLogoButton> {
         child: Visibility(
           visible: widget.isVisible,
           child: const FlutterLogo(
-            size: 50,
+            size: 80,
           ),
         ),
       ),
