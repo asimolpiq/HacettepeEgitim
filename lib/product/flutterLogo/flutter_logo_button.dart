@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class FlutterLogoButton extends StatefulWidget {
-  final bool isVisible;
-  const FlutterLogoButton({super.key, this.isVisible = true});
+  bool isVisible;
+  FlutterLogoButton({super.key, this.isVisible = true});
 
   @override
   State<FlutterLogoButton> createState() => _FlutterLogoButtonState();
