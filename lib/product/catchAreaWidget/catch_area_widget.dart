@@ -9,12 +9,7 @@ Column catchAreaWidget([int? score, int? time, List<FlutterLogoButton>? logoButt
       _scoreBoard(score),
       _body(logoButtons),
       _timerBoard(time),
-      Container(
-        decoration: BoxDecoration(
-          color: Colors.blue.shade400,
-          borderRadius: BorderRadius.circular(20),
-        ),
-      )
+      
     ],
   );
 }

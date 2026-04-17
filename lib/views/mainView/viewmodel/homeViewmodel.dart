@@ -8,7 +8,7 @@ import '../home_view.dart';
 
 abstract class HomeViewModel extends State<CatchTheFlutter> {
   int score = 0;
-  int time = 10;
+  int time = 30;
   late List<FlutterLogoButton> logoButtons; // 9 buton için görünürlük durumu
   Timer? headchanger;
   Timer? countdownTimer;
@@ -53,7 +53,10 @@ abstract class HomeViewModel extends State<CatchTheFlutter> {
           if (time > 0) time--;
         });
 
-        if (time == 0) timer.cancel();
+        if (time == 0) {
+          timer.cancel();
+          retryDialog();
+        }
       },
     );
   }
@@ -64,5 +67,49 @@ abstract class HomeViewModel extends State<CatchTheFlutter> {
         score++;
       });
     }
+  }
+
+  retryDialog() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text("Your Score: $score"),
+            content: const Text("Do you want to play again?"),
+            actions: [
+              OutlinedButton(
+                  style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.green)),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    closeCurrentGame();
+                  },
+                  child: const Text(
+                    "Try Again!",
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                    ),
+                  ))
+            ],
+          );
+        });
+  }
+
+  //Navigator kullanarak oyunu yeniden başlatmak yerine, skor ve zamanı sıfırlayarak mevcut oyunu yeniden başlatmayı tercih ettim. Bu yöntem, kullanıcı deneyimini daha akıcı hale getirir ve gereksiz sayfa geçişlerini önler.
+  // closeCurrentGame() {
+  //   Navigator.pop(context);
+  //   Navigator.push(context, MaterialPageRoute(builder: (context) => const CatchTheFlutter()));
+  // }
+
+//Navigator kullanmadan oyunu yeniden başlatıyoruz. closeCurrentGame fonksiyonu, skor ve zamanı sıfırlayarak mevcut oyunu yeniden başlatır. Ayrıca headChangerFunction ve countdownTimerFunction fonksiyonlarını çağırarak oyun döngüsünü yeniden başlatır.
+  closeCurrentGame() {
+    setState(() {
+      score = 0;
+      time = 5;
+    });
+    headChangerFunction();
+    countdownTimerFunction();
   }
 }
