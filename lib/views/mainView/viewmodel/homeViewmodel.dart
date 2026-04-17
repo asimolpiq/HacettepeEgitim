@@ -8,7 +8,7 @@ import '../home_view.dart';
 
 abstract class HomeViewModel extends State<CatchTheFlutter> {
   int score = 0;
-  int time = 0;
+  int time = 10;
   late List<FlutterLogoButton> logoButtons; // 9 buton için görünürlük durumu
   Timer? headchanger;
   Timer? countdownTimer;
@@ -18,10 +18,16 @@ abstract class HomeViewModel extends State<CatchTheFlutter> {
     super.initState();
     generateButtonList();
     headChangerFunction();
+    countdownTimerFunction();
   }
 
   generateButtonList() {
-    logoButtons = List.generate(9, (index) => FlutterLogoButton(isVisible: false));
+    logoButtons = List.generate(
+        9,
+        (index) => FlutterLogoButton(
+              isVisible: false,
+              onPressed: increaseScore,
+            ));
   }
 
   headChangerFunction() {
@@ -33,11 +39,30 @@ abstract class HomeViewModel extends State<CatchTheFlutter> {
         setState(() {
           logoButtons[Random().nextInt(9)].isVisible = true;
         });
+
+        if (time == 0) timer.cancel();
       },
     );
   }
 
-  countdownTimerFunction(){
-    
+  countdownTimerFunction() {
+    countdownTimer = Timer.periodic(
+      const Duration(seconds: 1),
+      (timer) {
+        setState(() {
+          if (time > 0) time--;
+        });
+
+        if (time == 0) timer.cancel();
+      },
+    );
+  }
+
+  increaseScore() {
+    if (time > 0) {
+      setState(() {
+        score++;
+      });
+    }
   }
 }

@@ -13,7 +13,6 @@ Column catchAreaWidget([int? score, int? time, List<FlutterLogoButton>? logoButt
         decoration: BoxDecoration(
           color: Colors.blue.shade400,
           borderRadius: BorderRadius.circular(20),
-          
         ),
       )
     ],
