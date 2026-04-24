@@ -1,3 +1,4 @@
+import 'package:firsproject/views/mainView/home_screen_view.dart';
 import 'package:flutter/material.dart';
 
 import 'views/mainView/home_view.dart';
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Material App',
-      home: CatchTheFlutter(),
+      home: HomeScreenView(),
     );
   }
 }
+
