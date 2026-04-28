@@ -8,10 +8,9 @@ import 'viewmodel/homeViewmodel.dart';
 class CatchTheFlutter extends StatefulWidget {
   const CatchTheFlutter({super.key, required this.difficultyLevel});
 
-    final DifficultyLevel difficultyLevel;
+  final DifficultyLevel difficultyLevel;
 
-    @override
-
+  @override
   @override
   State<CatchTheFlutter> createState() => _CatchTheFlutterState();
 }
