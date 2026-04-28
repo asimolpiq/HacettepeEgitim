@@ -4,11 +4,13 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import '../../../product/flutterLogo/flutter_logo_button.dart';
 
+import '../home_screen_view.dart';
 import '../home_view.dart';
 
 abstract class HomeViewModel extends State<CatchTheFlutter> {
   int score = 0;
   int time = 30;
+  late int gameSpeed;
   late List<FlutterLogoButton> logoButtons; // 9 buton için görünürlük durumu
   Timer? headchanger;
   Timer? countdownTimer;
@@ -16,6 +18,14 @@ abstract class HomeViewModel extends State<CatchTheFlutter> {
   @override
   void initState() {
     super.initState();
+
+    if(widget.difficultyLevel == DifficultyLevel.kolay){
+      gameSpeed = 600;
+    } else if(widget.difficultyLevel == DifficultyLevel.orta){
+      gameSpeed = 450;
+    } else {
+      gameSpeed = 300;
+    }
     generateButtonList();
     headChangerFunction();
     countdownTimerFunction();
@@ -32,7 +42,7 @@ abstract class HomeViewModel extends State<CatchTheFlutter> {
 
   headChangerFunction() {
     headchanger = Timer.periodic(
-      const Duration(milliseconds: 400),
+      Duration(milliseconds: gameSpeed),
       (timer) {
         logoButtons.clear();
         generateButtonList();
@@ -79,7 +89,7 @@ abstract class HomeViewModel extends State<CatchTheFlutter> {
             content: const Text("Do you want to play again?"),
             actions: [
               OutlinedButton(
-                  style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.green)),
+                  style: OutlinedButton.styleFrom(side: const BorderSide(color: Colors.blue)),
                   onPressed: () {
                     Navigator.pop(context);
                     closeCurrentGame();
@@ -87,9 +97,9 @@ abstract class HomeViewModel extends State<CatchTheFlutter> {
                   child: const Text(
                     "Try Again!",
                     style: TextStyle(
-                      color: Colors.green,
+                      color: Colors.blue,
                       fontWeight: FontWeight.w700,
-                      fontSize: 14,
+                      fontSize: 16,
                     ),
                   ))
             ],
@@ -107,7 +117,7 @@ abstract class HomeViewModel extends State<CatchTheFlutter> {
   closeCurrentGame() {
     setState(() {
       score = 0;
-      time = 5;
+      time = 30;
     });
     headChangerFunction();
     countdownTimerFunction();
